@@ -1,0 +1,75 @@
+<html>
+<head>
+<style>
+.itemlistitem {
+width: 50px;
+height 50px;
+position: absolute;
+left: 0px;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+#div1, #div2 {
+  float: left;
+  width: 100px;
+  height: 35px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  console.log(data)
+  console.log(ev.target)
+  console.log(ev.target.getAttribute('itemid'))
+  //ev.target.appendChild(document.getElementById(data));
+}
+function swapitemscrollside(b, s, l) {
+console.log(b)
+    const itemscroll = document.getElementById('itemscrolldiv')
+    if (itemscroll.style.left == '0px') {itemscroll.style.left = '825px'; if (l != null) {l.style.direction = "ltr";} if (b != null) {b.style.left = '152px'} if (s != null) {s.style.left = '2px'}}else{itemscroll.style.left = '0px'; if (l != null) {l.style.direction = "rtl";} if (b != null) {b.style.left = '3px'} if (s != null) {s.style.left = '72px'}}
+}
+</script>
+</head>
+<body>
+<h1 style="position: absolute; top: 10px; left: 500px;">Combination Game Sample</h1>
+<div id="game" style="position: absolute; top: 100px; left: 175px; width: 1000px; height: 500px; border-style: solid;">
+<div id="main" style="position: absolute; top: 0px; left: 170px; background-color: red; width: 830px; height: 500px;">
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+<img itemid="00000001" id="9988318851818258183215961" src="./assets/items/water.png" draggable="true" ondragstart="drag(event)" width="88" height="31">
+</div>
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+<div id="itemscrolldiv" style="position: absolute; top: 0px; left: 0px; width: 175px; height: 500px; background-color: #D3D3D3; border-style: hidden;">
+<div id="itemscrollconfig" style="border-style: double; width: 169px; height: 20px;">
+<img src="./assets/swap1.png" alt="swap" onclick="swapitemscrollside(this, document.getElementById('itemscrollsearch'), document.getElementById('itemscrolllist'));" style="position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;"></img>
+<input id="itemscrollsearch" type="text" placeholder="search" style="width: 100px; height: 20px; position: absolute; top: 3px; left: 72px;">
+</div>
+<div id="itemscrolllist" style="overflow-y: scroll; direction: rtl; overflow-x: auto; position: absolute; top: 28px; left: 2px; width: 171px; height: 470px; background-color: white;">
+<ul style="list-style-type: none;">
+<li><p class="noselect" style="position: relative; top: 20px; left: -25px;">Water</p></li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</head>
+</html>
